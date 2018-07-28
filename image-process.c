@@ -1,7 +1,7 @@
 #include"stdio.h" 
 #include"stdlib.h"
 
-//´Ë³ÌĞòÄ¿Ç°Ö»ÏŞbmp¸ñÊ½Í¼Æ¬Ê¹ÓÃ¡£ 
+//æ­¤ç¨‹åºç›®å‰åªé™bmpæ ¼å¼å›¾ç‰‡ä½¿ç”¨ã€‚ 
 
 char r[3000][3000],g[3000][3000],b[3000][3000];
 int b1[3000][3000],g1[3000][3000],r1[3000][3000],all[3000][3000] ;
@@ -9,14 +9,14 @@ int startplace=0,width=0,height=0;
 int num;
 
 
-void bmptest(FILE*bmpfp);              //²âÊÔ¸ñÊ½ÕıÈ·¡£
-void bmpinformation(FILE*bmpfp);       //¶ÁÈ¡Í¼Æ¬ĞÅÏ¢¡£ 
-void bmpcopyoutput(FILE*bmpfp);        //¸´ÖÆÊä³ö¡£
-void bmpfly(FILE*bmpfp);               //Ğı×ªÊä³ö¡£ 
-void bmpfullmsk(FILE*bmpfp);           //È«¾ÖÂíÈü¿Ë¡£ 
-void bmpmsk(FILE*bmpfp);               //¾Ö²¿ÂíÈü¿Ë¡£ 
-void bmpturn();                        //×Ö·û»­¡£ 
-void bmpboom(FILE*bmpfp);              //¾µÏñÊä³ö¡£ 
+void bmptest(FILE*bmpfp);              //æµ‹è¯•æ ¼å¼æ­£ç¡®ã€‚
+void bmpinformation(FILE*bmpfp);       //è¯»å–å›¾ç‰‡ä¿¡æ¯ã€‚ 
+void bmpcopyoutput(FILE*bmpfp);        //å¤åˆ¶è¾“å‡ºã€‚
+void bmpfly(FILE*bmpfp);               //æ—‹è½¬è¾“å‡ºã€‚ 
+void bmpfullmsk(FILE*bmpfp);           //å…¨å±€é©¬èµ›å…‹ã€‚ 
+void bmpmsk(FILE*bmpfp);               //å±€éƒ¨é©¬èµ›å…‹ã€‚ 
+void bmpturn();                        //å­—ç¬¦ç”»ã€‚ 
+void bmpboom(FILE*bmpfp);              //é•œåƒè¾“å‡ºã€‚ 
 
 
 int main()
@@ -25,14 +25,14 @@ int main()
   bmpfp=fopen("bmp1.bmp","rb");
   if(bmpfp==NULL)
   { 
-    printf("ÎŞ·¨´ò¿ªÍ¼Æ¬!\n");
+    printf("æ— æ³•æ‰“å¼€å›¾ç‰‡!\n");
     return 0;
   }
-  else printf("³É¹¦´ò¿ªÍ¼Æ¬!\n");//Ê×ÏÈÈ·ÈÏÍ¼Æ¬¿ÉÒÔ´ò¿ª ¡£
+  else printf("æˆåŠŸæ‰“å¼€å›¾ç‰‡!\n");//é¦–å…ˆç¡®è®¤å›¾ç‰‡å¯ä»¥æ‰“å¼€ ã€‚
   
-  bmptest(bmpfp);//¼ì²âÎÄ¼şÊÇ·ñÎªbmp¸ñÊ½¡£ 
+  bmptest(bmpfp);//æ£€æµ‹æ–‡ä»¶æ˜¯å¦ä¸ºbmpæ ¼å¼ã€‚ 
   
-  bmpinformation(bmpfp);//¶ÁÈ¡ÎÄ¼şĞÅÏ¢£¬²¢ÓÃ×Ö·ûÊı×é¶ÔÎÄ¼şĞÅÏ¢½øĞĞ´¢´æ¡£ 
+  bmpinformation(bmpfp);//è¯»å–æ–‡ä»¶ä¿¡æ¯ï¼Œå¹¶ç”¨å­—ç¬¦æ•°ç»„å¯¹æ–‡ä»¶ä¿¡æ¯è¿›è¡Œå‚¨å­˜ã€‚ 
   
   int x; 
   while(1) 
@@ -40,48 +40,48 @@ int main()
   for(x=0;x<50;x++)printf("%c",77) ;
   printf("\n"); 
   for(x=0;x<3;x++)printf("%-49c%c\n",77,77) ;
-  printf("%-10c°´¡¾1¡¿½øĞĞÎÄ¼ş¸´ÖÆÊä³ö%17c\n",77,77); 
-  printf("%-10c°´¡¾2¡¿½øĞĞÎÄ¼şĞı×ªÊä³ö%17c\n",77,77); 
-  printf("%-10c°´¡¾3¡¿½øĞĞÎÄ¼şÈ«¾ÖÂíÈü¿ËÊä³ö%11c\n",77,77); 
-  printf("%-10c°´¡¾4¡¿½øĞĞÎÄ¼ş¾Ö²¿ÂíÈü¿ËÊä³ö%11c\n",77,77); 
-  printf("%-10c°´¡¾5¡¿½øĞĞÎÄ¼ş×Ö·û»­Êä³ö%15c\n",77,77);
-  printf("%-10c°´¡¾6¡¿½øĞĞÎÄ¼ş¾µÏñÊä³ö%17c\n",77,77); 
-  printf("%-10c°´¡¾0¡¿ÍË³ö%29c\n",77,77); 
+  printf("%-10cæŒ‰ã€1ã€‘è¿›è¡Œæ–‡ä»¶å¤åˆ¶è¾“å‡º%17c\n",77,77); 
+  printf("%-10cæŒ‰ã€2ã€‘è¿›è¡Œæ–‡ä»¶æ—‹è½¬è¾“å‡º%17c\n",77,77); 
+  printf("%-10cæŒ‰ã€3ã€‘è¿›è¡Œæ–‡ä»¶å…¨å±€é©¬èµ›å…‹è¾“å‡º%11c\n",77,77); 
+  printf("%-10cæŒ‰ã€4ã€‘è¿›è¡Œæ–‡ä»¶å±€éƒ¨é©¬èµ›å…‹è¾“å‡º%11c\n",77,77); 
+  printf("%-10cæŒ‰ã€5ã€‘è¿›è¡Œæ–‡ä»¶å­—ç¬¦ç”»è¾“å‡º%15c\n",77,77);
+  printf("%-10cæŒ‰ã€6ã€‘è¿›è¡Œæ–‡ä»¶é•œåƒè¾“å‡º%17c\n",77,77); 
+  printf("%-10cæŒ‰ã€0ã€‘é€€å‡º%29c\n",77,77); 
   for(x=0;x<3;x++)printf("%-49c%c\n",77,77) ;
   for(x=0;x<50;x++)printf("%c",77) ;
   printf("\n\n"); 
-  printf("ÇëÊäÈë£º") ; 
+  printf("è¯·è¾“å…¥ï¼š") ; 
   scanf("%d",&num);
   switch(num)
    {
-   	case 1:bmpcopyoutput(bmpfp);break;                      //¸´ÖÆÊä³ö¡£ 
-   	case 2:bmpfly(bmpfp);break;                             //Ğı×ªÊä³ö¡£ 
-   	case 3:bmpfullmsk(bmpfp) ;break;                        //È«¾ÖÂíÈü¿ËÊä³ö¡£ 
-   	case 4:bmpmsk(bmpfp) ;break;                            //¾Ö²¿ÂíÈü¿ËÊä³ö¡£ 
-   	case 5:bmpturn();break;                                 //×Ö·û»­Êä³ö¡£ 
-   	case 6:bmpboom(bmpfp);break;                            //¾µÏñ´¦ÀíÊä³ö¡£ 
-   	case 0:return 0;                                        //½áÊøÔËĞĞ¡£ 
-   	default:printf("ÊäÈë´íÎó£¬ÇëÖØĞÂÊäÈë\n"); 
+   	case 1:bmpcopyoutput(bmpfp);break;                      //å¤åˆ¶è¾“å‡ºã€‚ 
+   	case 2:bmpfly(bmpfp);break;                             //æ—‹è½¬è¾“å‡ºã€‚ 
+   	case 3:bmpfullmsk(bmpfp) ;break;                        //å…¨å±€é©¬èµ›å…‹è¾“å‡ºã€‚ 
+   	case 4:bmpmsk(bmpfp) ;break;                            //å±€éƒ¨é©¬èµ›å…‹è¾“å‡ºã€‚ 
+   	case 5:bmpturn();break;                                 //å­—ç¬¦ç”»è¾“å‡ºã€‚ 
+   	case 6:bmpboom(bmpfp);break;                            //é•œåƒå¤„ç†è¾“å‡ºã€‚ 
+   	case 0:return 0;                                        //ç»“æŸè¿è¡Œã€‚ 
+   	default:printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n"); 
    } 
-  }                                                         //²Ëµ¥µÄÑ­»·Êä³ö£¬²¢µ÷ÓÃÏàÓ¦º¯Êı¡£ 
+  }                                                         //èœå•çš„å¾ªç¯è¾“å‡ºï¼Œå¹¶è°ƒç”¨ç›¸åº”å‡½æ•°ã€‚ 
   fclose(bmpfp);
   system("pause");
   return 0;
 }
 
 
-void bmptest(FILE*bmpfp)//ÎÄ¼ş¼ì²â ¡£ 
+void bmptest(FILE*bmpfp)//æ–‡ä»¶æ£€æµ‹ ã€‚ 
 {
   char bmptestname1=0,bmptestname2=0;
   fseek(bmpfp,0,SEEK_SET);
   fread(&bmptestname1,1,1,bmpfp);
   fseek(bmpfp,1,SEEK_SET);
   fread(&bmptestname2,1,1,bmpfp);
-  if(bmptestname1=='B'&& bmptestname2=='M')                 //¶¨Î»Ö¸ÕëÎ»ÖÃ²¢¶ÁÈ¡Ç°Á½¸ö×Ö·û¡£ 
-    printf("Í¼Æ¬¸ñÊ½ÎªBMP !\n");
+  if(bmptestname1=='B'&& bmptestname2=='M')                 //å®šä½æŒ‡é’ˆä½ç½®å¹¶è¯»å–å‰ä¸¤ä¸ªå­—ç¬¦ã€‚ 
+    printf("å›¾ç‰‡æ ¼å¼ä¸ºBMP !\n");
   else 
     {
-	printf("\nÍ¼Æ¬¸ñÊ½´íÎó !\n"); 
+	printf("\nå›¾ç‰‡æ ¼å¼é”™è¯¯ !\n"); 
 	system("pause");
 	return 0; 
 	}                        
@@ -90,19 +90,19 @@ void bmptest(FILE*bmpfp)//ÎÄ¼ş¼ì²â ¡£
 
  
  
-void bmpinformation(FILE*bmpfp)//ÎÄ¼şĞÅÏ¢¡£ 
+void bmpinformation(FILE*bmpfp)//æ–‡ä»¶ä¿¡æ¯ã€‚ 
 {
   int i=0,j=0,fact=0; 
   char *temp=0; 
-  fseek(bmpfp,10,SEEK_SET) ;//¶ÁÈ¡ÎÄ¼ş³¤¶È 
+  fseek(bmpfp,10,SEEK_SET) ;//è¯»å–æ–‡ä»¶é•¿åº¦ 
   fread(&startplace,sizeof(char),4,bmpfp);
-  fseek(bmpfp,18,SEEK_SET) ;//¶ÁÈ¡ÎÄ¼ş¿í¶È 
+  fseek(bmpfp,18,SEEK_SET) ;//è¯»å–æ–‡ä»¶å®½åº¦ 
   fread(&width,sizeof(char),4,bmpfp);
-  fseek(bmpfp,22,SEEK_SET) ;//¶ÁÈ¡ÎÄ¼ş¸ß¶È 
+  fseek(bmpfp,22,SEEK_SET) ;//è¯»å–æ–‡ä»¶é«˜åº¦ 
   fread(&height,sizeof(char),4,bmpfp);
-  printf("Í¼Æ¬·Ö±æÂÊÎª%d * %d\n\n",width,height); 
+  printf("å›¾ç‰‡åˆ†è¾¨ç‡ä¸º%d * %d\n\n",width,height); 
   
-  fact=width*3;//¼ÆËãÃ¿ĞĞÊµ¼Ê×Ö·ûÊıÁ¿£¨±ØĞëÎª4µÄ±¶Êı£© 
+  fact=width*3;//è®¡ç®—æ¯è¡Œå®é™…å­—ç¬¦æ•°é‡ï¼ˆå¿…é¡»ä¸º4çš„å€æ•°ï¼‰ 
   fseek(bmpfp,startplace,SEEK_SET) ;
   while(fact%4!=0)
     fact+=1 ;
@@ -115,25 +115,25 @@ void bmpinformation(FILE*bmpfp)//ÎÄ¼şĞÅÏ¢¡£
 	    g[j][i]=temp[j*3+1]; 
 		r[j][i]=temp[j*3+2]; 
 	   } 
-	} //°ÑÏñËØĞÅÏ¢°´×Ö·û¸ñÊ½´æÈë×Ö·ûÊı×é 
+	} //æŠŠåƒç´ ä¿¡æ¯æŒ‰å­—ç¬¦æ ¼å¼å­˜å…¥å­—ç¬¦æ•°ç»„ 
   return 1;
 } 
 
 
   
-void bmpcopyoutput(FILE*bmpfp)//ÎÄ¼ş¿½±´¡£ 
+void bmpcopyoutput(FILE*bmpfp)//æ–‡ä»¶æ‹·è´ã€‚ 
 {
   FILE*bmpcopyoutfp;
   int i,j,fact;
   char*temp;
   
-  bmpcopyoutfp=fopen("bmpcopyout.bmp", "wb+"); //¶¨Òå±äÁ¿²¢´´½¨ĞÂÎÄ¼ş¡£ 
+  bmpcopyoutfp=fopen("bmpcopyout.bmp", "wb+"); //å®šä¹‰å˜é‡å¹¶åˆ›å»ºæ–°æ–‡ä»¶ã€‚ 
   
   fseek(bmpfp,0,SEEK_SET);
   fseek(bmpcopyoutfp,0,SEEK_SET);
   temp=malloc(startplace);
   fread(temp,1,startplace,bmpfp);
-  fwrite(temp,1,startplace,bmpcopyoutfp);//ÎÄ¼şÍ·È«²¿¿½±´ 
+  fwrite(temp,1,startplace,bmpcopyoutfp);//æ–‡ä»¶å¤´å…¨éƒ¨æ‹·è´ 
   
   fseek(bmpcopyoutfp,startplace,SEEK_SET);
   fact=width*3;
@@ -149,15 +149,15 @@ void bmpcopyoutput(FILE*bmpfp)//ÎÄ¼ş¿½±´¡£
      temp[j*3+2]=r[j][i];
      } 
   fwrite(temp,1,fact,bmpcopyoutfp); 
-  }//ÎÄ¼şÏñËØÄÚÈİ²¿·ÖÈ«²¿¿½±´ 
+  }//æ–‡ä»¶åƒç´ å†…å®¹éƒ¨åˆ†å…¨éƒ¨æ‹·è´ 
   fclose(bmpcopyoutfp);
-  printf("²Ù×÷³É¹¦\n")  ;  
+  printf("æ“ä½œæˆåŠŸ\n")  ;  
   return 1; 
 } 
 
 
 
-void bmpfullmsk(FILE*bmpfp)//ÎÄ¼şÈ«¾ÖÂíÈû¿Ë¡£ 
+void bmpfullmsk(FILE*bmpfp)//æ–‡ä»¶å…¨å±€é©¬å¡å…‹ã€‚ 
 {
   FILE*bmpfullmskfp;
   int i,j,fact,k;
@@ -165,20 +165,20 @@ void bmpfullmsk(FILE*bmpfp)//ÎÄ¼şÈ«¾ÖÂíÈû¿Ë¡£
   
   bmpfullmskfp=fopen("bmpfullmsk.bmp", "wb+"); 
   
-  printf("ÇëÊäÈë´¦Àí³Ì¶È£¨1-10£©:") ; 
+  printf("è¯·è¾“å…¥å¤„ç†ç¨‹åº¦ï¼ˆ1-10ï¼‰:") ; 
   scanf("%d",&k); 
   if(k<1||k>10) 
     {
-    printf("ÊäÈë´íÎó\n") ;
+    printf("è¾“å…¥é”™è¯¯\n") ;
     return 1;
-    }//Â¼Èë´¦Àí³Ì¶È 
+    }//å½•å…¥å¤„ç†ç¨‹åº¦ 
   k=k*5 ; 
   
   
   fseek(bmpfp,0,SEEK_SET);
   fseek(bmpfullmskfp,0,SEEK_SET);
   temp=malloc(startplace);
-  fread(temp,1,startplace,bmpfp);//ÎÄ¼şÍ·È«²¿¿½±´ 
+  fread(temp,1,startplace,bmpfp);//æ–‡ä»¶å¤´å…¨éƒ¨æ‹·è´ 
   
   fwrite(temp,1,startplace,bmpfullmskfp);
   fseek(bmpfullmskfp,startplace,SEEK_SET);
@@ -195,15 +195,15 @@ void bmpfullmsk(FILE*bmpfp)//ÎÄ¼şÈ«¾ÖÂíÈû¿Ë¡£
      temp[j*3+2]=r[j-j%k][i-i%k];
      } 
   fwrite(temp,1,fact,bmpfullmskfp); 
-  }//ÒÔÒ»¸ö½ÇµÄµ¥¸öÏñËØÎª»ù×¼£¬·¶Î§¸´ÖÆµ½ÆäËû²¿·Ö 
+  }//ä»¥ä¸€ä¸ªè§’çš„å•ä¸ªåƒç´ ä¸ºåŸºå‡†ï¼ŒèŒƒå›´å¤åˆ¶åˆ°å…¶ä»–éƒ¨åˆ† 
   fclose(bmpfullmskfp);
-  printf("²Ù×÷³É¹¦\n")  ;  
+  printf("æ“ä½œæˆåŠŸ\n")  ;  
   return 1; 
 } 
   
 
   
-void bmpmsk(FILE*bmpfp)//¾Ö²¿ÂíÈü¿Ë 
+void bmpmsk(FILE*bmpfp)//å±€éƒ¨é©¬èµ›å…‹ 
 {
   FILE*bmpmskfp;
   int i,j,fact,k,width1,width2,height1,height2;
@@ -211,29 +211,29 @@ void bmpmsk(FILE*bmpfp)//¾Ö²¿ÂíÈü¿Ë
   
   bmpmskfp=fopen("bmpmsk.bmp", "wb+"); 
   
-  printf("ÇëÊäÈë´¦Àí³Ì¶È£¨1-10£©:") ; 
+  printf("è¯·è¾“å…¥å¤„ç†ç¨‹åº¦ï¼ˆ1-10ï¼‰:") ; 
   scanf("%d",&k);
   if(k<1||k>10) 
     {
-    printf("ÊäÈë´íÎó\n") ;
+    printf("è¾“å…¥é”™è¯¯\n") ;
     return 1;
     }
   k=k*5 ; 
   
   
-  printf("ÇëÊäÈë´¦Àí·¶Î§£¨´Ó×óÏÂ½Çµ½ÓÒÉÏ½ÇµÄ×ø±ê£©:") ; 
+  printf("è¯·è¾“å…¥å¤„ç†èŒƒå›´ï¼ˆä»å·¦ä¸‹è§’åˆ°å³ä¸Šè§’çš„åæ ‡ï¼‰:") ; 
   scanf("%d%d%d%d",&width1,&height1,&width2,&height2); 
   if(width1>=width2||width2>width||height1>=height2||height2>height)
   {
-  printf("ÊäÈë´íÎó\n");
-  return 1; // Â¼ÈëÁ½¸ö×ø±ê²¢¼ì²âÊÇ·ñÕıÈ· 
+  printf("è¾“å…¥é”™è¯¯\n");
+  return 1; // å½•å…¥ä¸¤ä¸ªåæ ‡å¹¶æ£€æµ‹æ˜¯å¦æ­£ç¡® 
   } 
   
   fseek(bmpfp,0,SEEK_SET);
   fseek(bmpmskfp,0,SEEK_SET);
   temp=malloc(startplace);
   fread(temp,1,startplace,bmpfp);
-  fwrite(temp,1,startplace,bmpmskfp);//ÎÄ¼şÍ·¸´ÖÆ 
+  fwrite(temp,1,startplace,bmpmskfp);//æ–‡ä»¶å¤´å¤åˆ¶ 
   
   fseek(bmpmskfp,startplace,SEEK_SET);
   fact=width*3;
@@ -267,15 +267,15 @@ void bmpmsk(FILE*bmpfp)//¾Ö²¿ÂíÈü¿Ë
      temp[j*3+2]=r[j][i];
      } 
   fwrite(temp,1,fact,bmpmskfp); 
-  }//¶ÔÊÇ·ñÔÚ·¶Î§ÄÚ½øĞĞÅĞ¶Ï£¬²»ÔÚ·¶Î§ÄÚµÄ°´¸´ÖÆ´¦Àí 
+  }//å¯¹æ˜¯å¦åœ¨èŒƒå›´å†…è¿›è¡Œåˆ¤æ–­ï¼Œä¸åœ¨èŒƒå›´å†…çš„æŒ‰å¤åˆ¶å¤„ç† 
   fclose(bmpmskfp);
-  printf("²Ù×÷³É¹¦\n")  ;  
+  printf("æ“ä½œæˆåŠŸ\n")  ;  
   return 1;
 }
 
 
 
-void bmpturn()//×Ö·û»­Êä³ö 
+void bmpturn()//å­—ç¬¦ç”»è¾“å‡º 
 {
   int i,j;
   char temp[3000];
@@ -299,7 +299,7 @@ void bmpturn()//×Ö·û»­Êä³ö
 	  else
 	    r1[i][j]=(int)r[i][j];
 	  all[i][j] =(b1[i][j]+ g1[i][j]+r1[i][j] )/3 ;
-      }//¼ÆËãÁÁ¶È 
+      }//è®¡ç®—äº®åº¦ 
    
    
 fseek(bmpturnfp,0,SEEK_SET);
@@ -325,9 +325,9 @@ fseek(bmpturnfp,0,SEEK_SET);
 	    temp[i]=(char)77; 
 	temp[i]=(char)10;
 	fputs(&temp,bmpturnfp);
-    }//Â¼ÈëtxtÎÄ±¾ 
+    }//å½•å…¥txtæ–‡æœ¬ 
   fclose(bmpturnfp);
-  printf("²Ù×÷³É¹¦\n");  
+  printf("æ“ä½œæˆåŠŸ\n");  
   return 1;
 } 
     
@@ -339,9 +339,9 @@ void bmpfly(FILE*bmpfp)
   int i,j,fact,order,newheight,newwidth;
   char*temp;
   
-  printf("Ë³Ê±Õë90¶ÈÇë°´1\n"); 
-  printf("Ë³Ê±Õë180¶ÈÇë°´2\n");
-  printf("ÄæÊ±Õë90¶ÈÇë°´3\n");
+  printf("é¡ºæ—¶é’ˆ90åº¦è¯·æŒ‰1\n"); 
+  printf("é¡ºæ—¶é’ˆ180åº¦è¯·æŒ‰2\n");
+  printf("é€†æ—¶é’ˆ90åº¦è¯·æŒ‰3\n");
   scanf("%d",&order);
   switch(order)
   {
@@ -357,7 +357,7 @@ void bmpfly(FILE*bmpfp)
     fseek(bmpflyfp,0,SEEK_SET);
     temp=malloc(17);
     fread(temp,1,17,bmpfp);
-    fwrite(temp,1,17,bmpflyfp);//¸´ÖÆÍ·ÎÄ¼şµÚÒ»²¿·Ö¡£ 
+    fwrite(temp,1,17,bmpflyfp);//å¤åˆ¶å¤´æ–‡ä»¶ç¬¬ä¸€éƒ¨åˆ†ã€‚ 
    
     fseek(bmpfp,22,SEEK_SET);
     fseek(bmpflyfp,18,SEEK_SET);
@@ -369,20 +369,20 @@ void bmpfly(FILE*bmpfp)
     fseek(bmpflyfp,22,SEEK_SET);
     temp=malloc(4);
     fread(temp,1,4,bmpfp);
-    fwrite(temp,1,4,bmpflyfp);//³¤¿í¸Ä±ä 
+    fwrite(temp,1,4,bmpflyfp);//é•¿å®½æ”¹å˜ 
   
   
     fseek(bmpfp,26,SEEK_SET);
     fseek(bmpflyfp,26,SEEK_SET);
     temp=malloc(28);
     fread(temp,1,26,bmpfp);
-    fwrite(temp,1,26,bmpflyfp);//¸´ÖÆÍ·ÎÄ¼şµÚ¶ş²¿·Ö 
+    fwrite(temp,1,26,bmpflyfp);//å¤åˆ¶å¤´æ–‡ä»¶ç¬¬äºŒéƒ¨åˆ† 
    
     fseek(bmpflyfp,startplace,SEEK_SET);
     fact=newwidth*3;
     while(fact%4!=0)
     fact+=1 ;
-    temp=malloc(fact); //ÖØĞÂ¼ÆËã¿í¶ÈÉÏ×Ö·ûµÄ¸öÊı 
+    temp=malloc(fact); //é‡æ–°è®¡ç®—å®½åº¦ä¸Šå­—ç¬¦çš„ä¸ªæ•° 
   
     for(i=newheight-1;i>=0;i--)
       {
@@ -393,7 +393,7 @@ void bmpfly(FILE*bmpfp)
            temp[j*3+2]=r[i][j];
            }
     fwrite(temp,1,fact,bmpflyfp); 
-      } //ÏñËØĞÅÏ¢Â¼Èë 
+      } //åƒç´ ä¿¡æ¯å½•å…¥ 
     break; 
   
   
@@ -407,7 +407,7 @@ void bmpfly(FILE*bmpfp)
     fseek(bmpflyfp,0,SEEK_SET);
     temp=malloc(startplace);
     fread(temp,1,startplace,bmpfp);
-    fwrite(temp,1,startplace,bmpflyfp); //ÎÄ¼şÍ·¸´ÖÆ            
+    fwrite(temp,1,startplace,bmpflyfp); //æ–‡ä»¶å¤´å¤åˆ¶            
    
     fseek(bmpflyfp,startplace,SEEK_SET);
     fact=newwidth*3;
@@ -424,7 +424,7 @@ void bmpfly(FILE*bmpfp)
            temp[i*3+2]=r[newwidth-1-i][j];
            }
     fwrite(temp,1,fact,bmpflyfp); 
-      } //ÏñËØĞÅÏ¢Â¼Èë
+      } //åƒç´ ä¿¡æ¯å½•å…¥
     break;
   
   
@@ -438,7 +438,7 @@ void bmpfly(FILE*bmpfp)
     fseek(bmpflyfp,0,SEEK_SET);
     temp=malloc(17);
     fread(temp,1,17,bmpfp);
-    fwrite(temp,1,17,bmpflyfp);//¸´ÖÆÍ·ÎÄ¼şµÚÒ»²¿·Ö¡£ 
+    fwrite(temp,1,17,bmpflyfp);//å¤åˆ¶å¤´æ–‡ä»¶ç¬¬ä¸€éƒ¨åˆ†ã€‚ 
    
     fseek(bmpfp,22,SEEK_SET);
     fseek(bmpflyfp,18,SEEK_SET);
@@ -450,14 +450,14 @@ void bmpfly(FILE*bmpfp)
     fseek(bmpflyfp,22,SEEK_SET);
     temp=malloc(4);
     fread(temp,1,4,bmpfp);
-    fwrite(temp,1,4,bmpflyfp);//³¤¿í¸Ä±ä 
+    fwrite(temp,1,4,bmpflyfp);//é•¿å®½æ”¹å˜ 
   
   
     fseek(bmpfp,26,SEEK_SET);
     fseek(bmpflyfp,26,SEEK_SET);
     temp=malloc(28);
     fread(temp,1,26,bmpfp);
-    fwrite(temp,1,26,bmpflyfp);//¸´ÖÆÍ·ÎÄ¼şµÚ¶ş²¿·Ö¡£ 
+    fwrite(temp,1,26,bmpflyfp);//å¤åˆ¶å¤´æ–‡ä»¶ç¬¬äºŒéƒ¨åˆ†ã€‚ 
    
     fseek(bmpflyfp,startplace,SEEK_SET);
     fact=newwidth*3;
@@ -476,10 +476,10 @@ void bmpfly(FILE*bmpfp)
     fwrite(temp,1,fact,bmpflyfp); 
       } 
     break; 
-  default: printf("ÊäÈë´íÎó£¬ÇëÖØĞÂÊäÈë");  
-  }//ÏñËØĞÅÏ¢Â¼Èë
+  default: printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥");  
+  }//åƒç´ ä¿¡æ¯å½•å…¥
   fclose(bmpflyfp);
-  printf("²Ù×÷³É¹¦\n")  ;  
+  printf("æ“ä½œæˆåŠŸ\n")  ;  
   return 1; 
 } 
 
@@ -497,7 +497,7 @@ void bmpboom(FILE*bmpfp)
   fseek(bmpboomfp,0,SEEK_SET);
   temp=malloc(startplace);
   fread(temp,1,startplace,bmpfp);
-  fwrite(temp,1,startplace,bmpboomfp);  //Í·ÎÄ¼ş¸´ÖÆ            
+  fwrite(temp,1,startplace,bmpboomfp);  //å¤´æ–‡ä»¶å¤åˆ¶            
    
   fseek(bmpboomfp,startplace,SEEK_SET);
   fact=width*3;
@@ -514,9 +514,9 @@ void bmpboom(FILE*bmpfp)
         temp[i*3+2]=r[width-1-i][j];
     }
   fwrite(temp,1,fact,bmpboomfp); 
-  } //ÏñËØÄÚÈİ¸´ÖÆ 
+  } //åƒç´ å†…å®¹å¤åˆ¶ 
   fclose(bmpboomfp);
-  printf("²Ù×÷³É¹¦\n")  ;  	
+  printf("æ“ä½œæˆåŠŸ\n")  ;  	
   return 1; 
 }
  
